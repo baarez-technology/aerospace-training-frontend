@@ -11,7 +11,7 @@ import {
   type F16Part,
 } from '@/data/f16Parts';
 
-const MODEL_URL = '/models/f-16.glb';
+const MODEL_URL = 'https://ho4j8cjjck6kspk6.public.blob.vercel-storage.com/f-16_fighting_falcon_-_fighter_jet_-_free.glb';
 useGLTF.preload(MODEL_URL);
 
 export type ViewMode = 'solid' | 'xray' | 'wireframe';
