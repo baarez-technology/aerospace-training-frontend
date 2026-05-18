@@ -372,7 +372,7 @@ export default function AIAssistantPage() {
           {/* ── Chat panel ───────────────────────────────────────────── */}
           <Card className="flex flex-col flex-1 min-w-0 min-h-0 bg-white border-slate-200 shadow-md overflow-hidden rounded-2xl">
             {/* Scrollable message list */}
-            <ScrollArea className="flex-1 min-h-0 px-4 pt-4 scrollbar-thin scrollbar-thumb-slate-200">
+            <div className="flex-1 min-h-0 overflow-y-auto px-4 pt-4">
               <div className="space-y-4 pb-2">
                 {messages.map((message) => (
                   <div key={message.id}
@@ -446,7 +446,7 @@ export default function AIAssistantPage() {
                 {/* Auto-scroll anchor */}
                 <div ref={bottomRef} />
               </div>
-            </ScrollArea>
+            </div>
 
             {/* Input bar — pinned to bottom */}
             <div className="shrink-0 p-4 bg-white border-t border-slate-100 shadow-inner">

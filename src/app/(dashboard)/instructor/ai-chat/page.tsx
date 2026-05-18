@@ -6,7 +6,6 @@ import { PageHeader } from '@/components/layout/PageHeader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { PageTransition } from '@/components/ui/PageTransition';
 import { DashboardSkeleton } from '@/components/ui/DashboardSkeleton';
@@ -97,7 +96,7 @@ export default function InstructorAIChatPage() {
 
   return (
     <PageTransition>
-      <div className="p-6 space-y-6 flex flex-col h-[calc(100vh-4rem)]">
+      <div className="p-6 flex flex-col gap-6 h-[calc(100vh-4rem)]">
         <PageHeader 
           title="AI Instructor Assistant" 
           subtitle="Instructor-grade AI tools for lesson planning, assessment, and squadron analysis" 
@@ -115,7 +114,7 @@ export default function InstructorAIChatPage() {
           <div className="lg:col-span-3 flex flex-col min-h-0">
             <Card className="bg-white border-slate-200 shadow-md flex-1 flex flex-col min-h-0 rounded-2xl overflow-hidden">
               {/* Messages */}
-              <ScrollArea className="flex-1 p-4">
+              <div ref={scrollRef} className="flex-1 overflow-y-auto min-h-0 p-4">
                 <div className="space-y-4 pb-2">
                   {messages.map((msg) => (
                     <div key={msg.id} className={cn('flex gap-3', msg.role === 'user' && 'flex-row-reverse')}>
@@ -151,7 +150,7 @@ export default function InstructorAIChatPage() {
                     </div>
                   )}
                 </div>
-              </ScrollArea>
+              </div>
 
               {/* Quick Actions */}
               <div className="px-4 py-3 bg-slate-50/50 border-t border-slate-100 flex gap-2 flex-wrap shrink-0">
