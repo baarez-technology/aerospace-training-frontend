@@ -34,7 +34,7 @@ interface ProcedureStep {
 interface Procedure {
   id: string;
   title: string;
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string }>;
   category: string;
   steps: ProcedureStep[];
 }

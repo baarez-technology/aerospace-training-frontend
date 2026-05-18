@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
-  icon?: React.ElementType;
+  icon?: React.ComponentType<{ className?: string }>;
   actions?: React.ReactNode;
   showBackButton?: boolean;
   className?: string;
