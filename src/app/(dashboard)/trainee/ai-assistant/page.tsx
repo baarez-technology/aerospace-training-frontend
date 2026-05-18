@@ -178,6 +178,7 @@ export default function AIAssistantPage() {
   const [input, setInput]       = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [backendAvailable, setBackendAvailable] = useState(true);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -188,9 +189,11 @@ export default function AIAssistantPage() {
     // Primary: backend → OpenAI/Gemini (handles auth, rate limiting, PII filter)
     try {
       const result = await backendSendMessage(userText);
+      setBackendAvailable(true);
       return { content: result.assistantMessage.content, fromBackend: true };
     } catch (backendErr) {
       console.warn('Backend AI unavailable, trying direct API:', backendErr);
+      setBackendAvailable(false);
     }
 
     // Fallback: direct Groq / OpenRouter if a key is set in the env
@@ -298,16 +301,13 @@ export default function AIAssistantPage() {
           />
         </div>
 
-        {/* API key missing banner */}
-        {!AI_API_KEY && (
+        {/* API key missing banner — only show when backend is down and no fallback key */}
+        {!backendAvailable && !AI_API_KEY && (
           <div className="shrink-0 flex items-center gap-2 rounded-lg border border-yellow-200 bg-yellow-50 px-4 py-2 text-sm text-yellow-800 shadow-sm">
             <AlertCircle className="w-4 h-4 shrink-0 text-yellow-600" />
             <span>
-              <strong className="font-bold text-yellow-900">AI API Key</strong> is not set. Get a key at{' '}
-              <a href="https://openrouter.ai" target="_blank" rel="noreferrer" className="underline font-bold">
-                openrouter.ai
-              </a>{' '}
-              and add it to your <code>app/.env</code> file as <code>VITE_OPENROUTER_API_KEY</code>.
+              <strong className="font-bold text-yellow-900">AI backend unreachable</strong> and no fallback key is configured.
+              Set <code>NEXT_PUBLIC_GROQ_API_KEY</code> or <code>NEXT_PUBLIC_OPENROUTER_API_KEY</code> in your environment to enable direct AI calls.
             </span>
           </div>
         )}
