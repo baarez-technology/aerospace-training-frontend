@@ -52,7 +52,7 @@ const AI_MODEL = IS_OPENROUTER
 
 type Step = 'upload' | 'extracting' | 'topics' | 'generate' | 'videos' | 'assign' | 'done';
 
-const STEPS: { key: Step; label: string; icon: React.ElementType }[] = [
+const STEPS: { key: Step; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { key: 'upload', label: 'Upload Document', icon: Upload },
   { key: 'topics', label: 'AI Topic Extraction', icon: Brain },
   { key: 'generate', label: 'Generate Videos', icon: Clapperboard },
