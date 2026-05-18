@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-const T2V_API = process.env.NEXT_PUBLIC_T2V_API || 'http://localhost:8100';
+const T2V_API = process.env.NEXT_PUBLIC_T2V_API ||
+  (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1').replace('/api/v1', '');
 
 const DEMO_QUESTIONS = [
   "How does the F-16 engine start?",
